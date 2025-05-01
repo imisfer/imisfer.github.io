@@ -1,0 +1,13 @@
+{
+    "version": "https://jsonfeed.org/version/1",
+    "title": "جداريات",
+    "description": "",
+    "home_page_url": "https://misfer.info",
+    "feed_url": "https://misfer.info/feed.json",
+    "user_comment": "",
+    "author": {
+        "name": "مسفر علي"
+    },
+    "items": [
+    ]
+}
