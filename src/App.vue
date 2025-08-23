@@ -14,6 +14,12 @@
               Home
             </router-link>
             <router-link 
+              to="/blog" 
+              class="text-gray-700 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium transition-colors"
+            >
+              Blog
+            </router-link>
+            <router-link 
               to="/about" 
               class="text-gray-700 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium transition-colors"
             >

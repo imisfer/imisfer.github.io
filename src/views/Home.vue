@@ -22,12 +22,12 @@
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         <article v-for="post in featuredPosts" :key="post.id" class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300">
           <div class="p-6">
-            <h3 class="text-xl font-semibold text-gray-900 mb-3">{{ post.title }}</h3>
-            <p class="text-gray-600 mb-4">{{ post.excerpt }}</p>
+            <h3 class="text-xl font-semibold text-gray-900 mb-3 text-right" dir="rtl">{{ post.title }}</h3>
+            <p class="text-gray-600 mb-4 text-right" dir="rtl">{{ post.excerpt }}</p>
             <div class="flex items-center justify-between">
-              <span class="text-sm text-gray-500">{{ post.date }}</span>
+              <span class="text-sm text-gray-500">{{ formatDate(post.timestamp) }}</span>
               <button class="text-indigo-600 hover:text-indigo-800 font-medium text-sm">
-                Read More →
+                اقرأ المزيد →
               </button>
             </div>
           </div>
@@ -54,33 +54,21 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
+import { getRecentPosts, type Post } from '@/data/posts'
 
-interface Post {
-  id: number
-  title: string
-  excerpt: string
-  date: string
+const featuredPosts = ref<Post[]>([])
+
+onMounted(() => {
+  featuredPosts.value = getRecentPosts(3)
+})
+
+function formatDate(timestamp: string): string {
+  const date = new Date(timestamp)
+  return date.toLocaleDateString('ar-SA', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  })
 }
-
-const featuredPosts = ref<Post[]>([
-  {
-    id: 1,
-    title: "Getting Started with Vue 3",
-    excerpt: "Learn the basics of Vue 3 and how to build modern web applications with the Composition API.",
-    date: "August 22, 2024"
-  },
-  {
-    id: 2,
-    title: "Building Static Sites with Vite",
-    excerpt: "Discover how to create lightning-fast static websites using Vite and modern build tools.",
-    date: "August 20, 2024"
-  },
-  {
-    id: 3,
-    title: "Tailwind CSS for Modern Web Design",
-    excerpt: "Master utility-first CSS with Tailwind and create beautiful, responsive designs efficiently.",
-    date: "August 18, 2024"
-  }
-])
 </script> 
