@@ -1,71 +1,72 @@
 <template>
-  <div class="max-w-6xl mx-auto space-y-8">
+  <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
     <!-- Header -->
-    <section class="text-center py-12">
-      <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-        المدونة
-      </h1>
-      <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-        مقالات عن الحياة، الفلسفة، ريادة الأعمال، والتطوير الشخصي
-      </p>
-    </section>
+    <div class="text-center mb-12">
+      <h1 class="text-4xl font-bold text-gray-900 mb-4" dir="rtl">المدونة</h1>
+      <p class="text-xl text-gray-600" dir="rtl">جميع المقالات والأفكار</p>
+    </div>
 
     <!-- Posts Grid -->
-    <section>
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <article 
-          v-for="post in paginatedPosts" 
-          :key="post.id" 
-          class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 cursor-pointer"
-          @click="viewPost(post.slug)"
-        >
-          <div class="p-6">
-            <h3 class="text-xl font-semibold text-gray-900 mb-3 text-right" dir="rtl">
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+      <article 
+        v-for="post in paginatedPosts" 
+        :key="post.id" 
+        class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300"
+      >
+        <div class="p-6">
+          <h2 class="text-xl font-semibold text-gray-900 mb-3 text-right" dir="rtl">
+            <router-link :to="`/post/${post.slug}`" class="hover:text-indigo-600 transition-colors">
               {{ post.title }}
-            </h3>
-            <p class="text-gray-600 mb-4 text-right leading-relaxed" dir="rtl">
-              {{ post.excerpt }}
-            </p>
-            <div class="flex items-center justify-between">
-              <span class="text-sm text-gray-500">
-                {{ formatDate(post.timestamp) }}
-              </span>
-              <button class="text-indigo-600 hover:text-indigo-800 font-medium text-sm">
-                اقرأ المزيد →
-              </button>
-            </div>
+            </router-link>
+          </h2>
+          <p class="text-gray-600 mb-4 text-right" dir="rtl">{{ post.excerpt }}</p>
+          <div class="flex items-center justify-between">
+            <span class="text-sm text-gray-500">{{ formatDate(post.timestamp) }}</span>
+            <router-link 
+              :to="`/post/${post.slug}`" 
+              class="text-indigo-600 hover:text-indigo-800 font-medium text-sm"
+            >
+              اقرأ المزيد →
+            </router-link>
           </div>
-        </article>
-      </div>
-    </section>
+        </div>
+      </article>
+    </div>
 
     <!-- Pagination -->
-    <section v-if="totalPages > 1" class="flex justify-center">
-      <div class="flex space-x-2">
-        <button 
-          v-for="page in totalPages" 
-          :key="page"
-          @click="currentPage = page"
-          :class="[
-            'px-4 py-2 rounded-lg font-medium transition-colors',
-            currentPage === page 
-              ? 'bg-indigo-600 text-white' 
-              : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-          ]"
-        >
-          {{ page }}
-        </button>
-      </div>
-    </section>
+    <div v-if="totalPages > 1" class="flex justify-center items-center space-x-2 space-x-reverse">
+      <button 
+        @click="goToPage(currentPage - 1)"
+        :disabled="currentPage === 1"
+        class="px-4 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+      >
+        السابق
+      </button>
+      
+      <span class="px-4 py-2 text-sm text-gray-700" dir="rtl">
+        صفحة {{ currentPage }} من {{ totalPages }}
+      </span>
+      
+      <button 
+        @click="goToPage(currentPage + 1)"
+        :disabled="currentPage === totalPages"
+        class="px-4 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+      >
+        التالي
+      </button>
+    </div>
+
+    <!-- No Posts Message -->
+    <div v-if="posts.length === 0" class="text-center py-12">
+      <p class="text-gray-500 text-lg" dir="rtl">لا توجد مقالات متاحة حالياً</p>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
-import { useRouter } from 'vue-router'
 import { getAllPosts, type Post } from '@/data/posts'
 
-const router = useRouter()
 const posts = ref<Post[]>([])
 const currentPage = ref(1)
 const postsPerPage = 9
@@ -82,6 +83,13 @@ const paginatedPosts = computed(() => {
   return posts.value.slice(start, end)
 })
 
+function goToPage(page: number) {
+  if (page >= 1 && page <= totalPages.value) {
+    currentPage.value = page
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+}
+
 function formatDate(timestamp: string): string {
   const date = new Date(timestamp)
   return date.toLocaleDateString('ar-SA', {
@@ -89,10 +97,6 @@ function formatDate(timestamp: string): string {
     month: 'long',
     day: 'numeric'
   })
-}
-
-function viewPost(slug: string): void {
-  router.push(`/post/${slug}`)
 }
 </script>
 

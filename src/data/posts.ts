@@ -7,101 +7,103 @@ export interface Post {
   slug: string
 }
 
-// Sample posts data - you can expand this with more posts
-export const posts: Post[] = [
-  {
-    id: '1',
-    title: 'الخصوصية',
-    content: `<p dir="rtl"><strong>جمع البيانات</strong></p>
-<p dir="rtl">لا أقوم في هذا الموقع بطلب وبالتالي جمع أي نوع من بيانات الزوار الشخصية.</p>
-<p dir="rtl"><strong>المحتوى المضمّن من مواقع أخرى</strong></p>
-<p dir="rtl">قد تتضمن المقالات على هذا الموقع محتوى مضمّن مثل الفيديوهات، الصور، المقالات، إلخ). يتصرف المحتوى المضمّن من مواقع أخرى بنفس الطريقة تمامًا كما لو كان الزائر قد زار الموقع الآخر.</p>`,
-    timestamp: '6 May 2024 4:40:51 AM',
-    excerpt: 'سياسة الخصوصية للموقع - جمع البيانات والمحتوى المضمّن',
-    slug: 'privacy'
-  },
-  {
-    id: '2',
-    title: 'فرفر وادي شرى',
-    content: `<p dir="rtl">وادي شرى مسقط رأسي، يقع على الحدود الفاصلة بين محافظتين. كانت فيه مدارس الأولاد تتبع لمحافظة الباحة ومدارس البنات تتبع لمحافظة عسير. طفولتي في هذا الوادي تحمل ذكريات جميلة كثيرة، أحدها الاستيقاظ على أصوات العصافير التي تبدأ العزف مبكرا قبل شروق الشمس.</p>
-<p dir="rtl">الفرفرة، الكوبرا، الجرذان، و عظام القردة يجمعها في هذا المقال ظروف متشابهة تعلمنا كيف أن الحلول البسيطة قد تفضي إلى مشكلات معقدة.</p>`,
-    timestamp: '9 May 2024 12:27:54 AM',
-    excerpt: 'قصة عن وادي شرى والعصافير، مع دروس من التاريخ عن الحلول البسيطة التي تؤدي إلى مشاكل معقدة',
-    slug: 'farfar-wadi-shura'
-  },
-  {
-    id: '3',
-    title: 'المهارة الصامتة',
-    content: `<p dir="rtl">هل تتعجب من توازن سعيد العويران محافظا على كرته متجاوزا المدافع تلو الآخر مسجلاً أحد أجمل أهداف المونديال؟</p>
-<p dir="rtl">ماذا يحدث خلف الكواليس؟ تبدأ القصة من ثلاث قنوات في أذنك الوسطى تقيس الميلان. يساعدها مستشعرات شبيهة بالشعر يستقر على رأسها بلورات تجعلها تتمايل مع الجاذبية.</p>`,
-    timestamp: '9 May 2024 12:38:31 AM',
-    excerpt: 'مقال عن التوازن في الحياة والعمل، مستوحى من مهارات كرة القدم',
-    slug: 'silent-skill'
-  },
-  {
-    id: '4',
-    title: 'القبح، الملل، والمعاناة',
-    content: `<p dir="rtl">في حوار إذاعي سأل المذيع ضيفه العجوز: الآن وقد بلغت السبعين، كيف أضحت جديتك في العمل؟</p>
-<p dir="rtl">فأجاب: أنا لا أفتأ أعمل، وأبذل ذات الجهد الذي كنت أبذله في العشرين.</p>
-<p dir="rtl">أعمل طوال اليوم، وكل ثانية من حياتي. حتى عندما أكون جالسًا مع زوجتي.</p>`,
-    timestamp: '9 May 2024 5:34:42 AM',
-    excerpt: 'مقال فلسفي عن الانضباط والعمل المستمر، مستوحى من قصة الدجاجة الصغيرة الحمراء',
-    slug: 'ugliness-boredom-suffering'
-  },
-  {
-    id: '5',
-    title: 'الريادي الصارم',
-    content: `<p dir="rtl">عنوان الكتاب: <strong>Disciplined Entrepreneurship</strong>: 24 Steps to Success</p>
-<p dir="rtl">إذا أصابك اليأس من بدء عملك التجاري الخاص أو أعيتك فكرة ريادة الأعمال، فإن هذا الكتاب قد يغير رأيك. إنه يدحض الادعاء بأن الرياديين هم فئة خاصة ولدوا بالمهارات الصحيحة.</p>`,
-    timestamp: '10 May 2024 7:44:25 AM',
-    excerpt: 'مراجعة كتاب عن ريادة الأعمال المنضبطة وخطوات النجاح الـ24',
-    slug: 'disciplined-entrepreneur'
-  },
-  {
-    id: '6',
-    title: 'الجود يفقر',
-    content: `<p dir="rtl">منذ سبع سنوات، حينها كنت لا أزال أمقت الكتب ولا سيما تلك التي تتناول تطوير الذات أو الفلسفة، فاجأني صديقي بإهدائي كتابًا صوتيًا.</p>
-<p dir="rtl">بعنوان "أعط، وخذ"، كان هذا الكتاب مثيرًا للاهتمام بعكس ما توقعت. يصنف الكاتب الناس إلى ثلاث فئات: المعطاء، منتهز الفرص، والمتوازن.</p>`,
-    timestamp: '11 May 2024 9:47:17 AM',
-    excerpt: 'مراجعة كتاب "أعط، وخذ" عن التوازن بين العطاء والنجاح',
-    slug: 'generosity-poverty'
-  },
-  {
-    id: '7',
-    title: 'البناء',
-    content: `<p dir="rtl">An Unorthodox Guide to Making Things Worth Making</p>
-<p dir="rtl">توني فاديل -أو ربما فاضل- قاد الفرق التي طورت iPod، iPhone، و Nest Learning Thermostat.</p>
-<p dir="rtl">خلال 30 سنة بوادي السيليكون، اكتسب خبرات عديدة في القيادة، التصميم، وإدارة الشركات الناشئة، وتعلم الكثير من شركتي Apple وGoogle.</p>`,
-    timestamp: '7 Aug 2024 5:23:40 PM',
-    excerpt: 'مراجعة كتاب "البناء" لتوني فاديل عن تطوير المنتجات والقيادة',
-    slug: 'building'
-  },
-  {
-    id: '8',
-    title: 'الإله الهجين',
-    content: `<p dir="rtl">في الإسكندرية القديمة، حيث تلاقت الثقافات وتداخلت الحضارات، واجه حاكمها تحديًا في الحفاظ على وحدة مدينته. كانت تضم خليطًا من المصريين المتمسكين بعقائدهم الراسخة والإغريق الذين جاؤوا بمعتقداتهم وتقاليدهم المختلفة.</p>
-<p dir="rtl">أدرك الحاكم، بطليموس، أن القوة وحدها لا تكفي لجمع هذا التنوع تحت راية واحدة. فبدلاً من فرض أحد الطرفين على الآخر، اخترع إلهاً جديداً أطلق عليه اسم "سيرابيس".</p>`,
-    timestamp: '26 Aug 2024 9:20:24 PM',
-    excerpt: 'قصة تاريخية عن بطليموس والإله سيرابيس في الإسكندرية القديمة',
-    slug: 'hybrid-god'
-  },
+// Utility function to extract first 25 words from content
+function extractFirst25Words(content: string): string {
+  // Remove HTML tags and get plain text
+  const plainText = content.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim()
+  
+  // Split into words and take first 25
+  const words = plainText.split(' ')
+  const first25Words = words.slice(0, 25).join(' ')
+  
+  // Add ellipsis if there are more words
+  return words.length > 25 ? first25Words + '...' : first25Words
+}
+
+// Function to parse HTML and extract metadata and content using regex
+function parseHTMLPost(htmlContent: string): Post {
+  console.log('Parsing HTML content length:', htmlContent.length)
+  console.log('First 200 chars:', htmlContent.substring(0, 200))
+  
+  // Extract metadata using regex
+  const idMatch = htmlContent.match(/<meta name="post-id" content="([^"]+)"/)
+  const titleMatch = htmlContent.match(/<meta name="post-title" content="([^"]+)"/)
+  const timestampMatch = htmlContent.match(/<meta name="post-timestamp" content="([^"]+)"/)
+  const slugMatch = htmlContent.match(/<meta name="post-slug" content="([^"]+)"/)
+  
+  // Extract content between <div class="post-content" dir="rtl"> and </div>
+  const contentMatch = htmlContent.match(/<div class="post-content" dir="rtl">([\s\S]*?)<\/div>/)
+  
+  console.log('Regex matches:', { idMatch, titleMatch, timestampMatch, slugMatch, contentMatch })
+  
+  const post = {
+    id: idMatch ? idMatch[1] : '',
+    title: titleMatch ? titleMatch[1] : '',
+    content: contentMatch ? contentMatch[1] : '',
+    timestamp: timestampMatch ? timestampMatch[1] : '',
+    excerpt: '',
+    slug: slugMatch ? slugMatch[1] : ''
+  }
+  
+  console.log('Parsed post:', post)
+  return post
+}
+
+// Dynamically load all HTML post files from the posts directory
+// Using the raw plugin to import HTML as actual content
+const postModules = import.meta.glob('../posts/*.html', { eager: true })
+
+console.log('Post modules loaded:', Object.keys(postModules))
+console.log('Post modules object:', postModules)
+
+// Convert the modules to Post objects
+const posts: Post[] = Object.values(postModules).map((module: any) => {
+  console.log('Processing module:', module)
+  const htmlContent = typeof module === 'string' ? module : module.default
+  console.log('HTML content type:', typeof htmlContent)
+  console.log('HTML content length:', htmlContent ? htmlContent.length : 'undefined')
+  return parseHTMLPost(htmlContent)
+})
+
+console.log('Final posts array:', posts)
+
+// All posts including the about page (for internal use)
+export const allPosts: Post[] = [
+  ...posts,
   {
     id: '9',
     title: 'نبذة',
     content: `<p dir="rtl">في عام ١٣٩٥هـ، أنجبتني. صنعتني على مهلٍ وتؤدة وكأنها تقول: ستلقاك الحياة كاملا بما أودعت فيك من المعاني، قويا بعطفك على النفوس، وفصيحا بإصغائك لكل شيء.</p>
-<p dir="rtl">والدي، والذي لشدة بساطته، لا يكاد يرى تعقيدات الحياة: يهزم الهائل بابتسامة ويعالج أذى الناس بذات الابتسامة.</p>`,
+<p dir="rtl">والدي، والذي لشدة بساطته، لا يكاد يرى تعقيدات الحياة: يهزم الهائل بابتسامة ويعالج أذى الناس بذات الابتسامة.</p>
+<p dir="rtl">علماني كل شيء دون أن يقولا الكثير؛ كانا دليل المستخدم لفك شفرة الحياة.</p>
+<p dir="rtl">نشأت في قرية "الدار"؛ وادعة وجميلة. تتوسط تخوم وادي "شرى" بين منطقتي الباحة وعسير.</p>
+<p dir="rtl"><video style="width: 100%; height: 100%; border-radius: 15px;" src="https://misfer.info/hala/wp-content/uploads/shura.mov" autoplay="autoplay" loop="loop" muted="" width="1844" height="920"><span data-mce-type="bookmark" style="display: inline-block; width: 0px; overflow: hidden; line-height: 0;" class="mce_SELRES_start">﻿</span><span data-mce-type="bookmark" style="display: inline-block; width: 0px; overflow: hidden; line-height: 0;" class="mce_SELRES_start">﻿</span><span data-mce-type="bookmark" style="display: inline-block; width: 0px; overflow: hidden; line-height: 0;" class="mce_SELRES_start">﻿</span>
+<span data-mce-type="bookmark" style="display: inline-block; width: 0px; overflow: hidden; line-height: 0;" class="mce_SELRES_start">﻿</span><source type="video/quicktime" src="https://misfer.info/hala/wp-content/uploads/shura.mov" /><span data-mce-type="bookmark" style="display: inline-block; width: 0px; overflow: hidden; line-height: 0;" class="mce_SELRES_start">﻿</span>
+</video></p>
+<p dir="rtl">مستفيدا من تعليم الدولة المجاني بالكامل، نلت بكالوريوس هندسة الكمبيوتر من الظهران. وبعدها بعشر سنوات، ماجستير في الإدارة الصحية للتنفيذيين. عشر سنين أخرى، ماجستير في إدارة التقنية.</p>
+<p dir="rtl">تشرفت بالمشاركة في التنمية وبناء مستقبل مستدام ومزدهر لوطني على مدى عقدين في مجالات تقنية المعلومات، الرعاية الصحية، التغذية، والعقارات، شملت تنفيذ الاستراتيجيات وإدارة المشاريع.</p>
+<p dir="rtl">لدي شغف كبير تجاه إعادة الفضل إلى مجتمعي: للتدريب في إدارة المشاريع، بناء الاستراتيجيات، مساعدة الشركات الناشئة، والتوجيه الحياتي.</p>
+<p dir="rtl">مسيرتي المهنية طابعها: العطاء الغير مشروط، التعلم المستمر، والتحسين المستمر.</p>
+<p dir="rtl">.</p>
+<p dir="rtl">.</p>
+<p dir="rtl"><b>بين يدي منشئ هذا الكون يملأني الامتنان: منحني الحياة، ألهمني التعلم من المحن، والتواضع لأوقن أن لا فضل لي في شيء.</b></p>`,
     timestamp: '30 Aug 2024 10:27:38 AM',
-    excerpt: 'نبذة شخصية عن النشأة في وادي شرى والمسيرة المهنية',
+    excerpt: '',
     slug: 'about'
   }
 ]
 
 export function getPostBySlug(slug: string): Post | undefined {
-  return posts.find(post => post.slug === slug)
+  return allPosts.find(post => post.slug === slug)
 }
 
 export function getAllPosts(): Post[] {
+  // Return only blog posts, excluding the about page
   return posts.sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime())
+    .map(post => ({
+      ...post,
+      excerpt: extractFirst25Words(post.content)
+    }))
 }
 
 export function getRecentPosts(limit: number = 3): Post[] {

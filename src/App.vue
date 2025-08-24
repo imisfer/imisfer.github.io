@@ -1,51 +1,56 @@
 <template>
-  <div id="app" class="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
-    <nav class="bg-white shadow-lg border-b border-gray-200">
+  <div id="app" class="min-h-screen bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm border-b">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
           <div class="flex items-center">
-            <h1 class="text-xl font-bold text-gray-900">Misfer's Blog</h1>
+            <router-link to="/" class="flex flex-col items-center">
+              <span class="text-xs text-gray-400 font-medium leading-none" style="font-size: 1rem; transform: translateY(15px);">مدونة</span>
+              <span class="text-2xl font-bold text-indigo-600 hover:text-indigo-800 transition-colors leading-none">مســـــــفر</span>
+            </router-link>
           </div>
-          <div class="flex items-center space-x-4">
-            <router-link 
-              to="/" 
+          
+          <div class="flex items-center space-x-4 space-x-reverse">
+            <router-link
+              to="/"
               class="text-gray-700 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium transition-colors"
             >
-              Home
+              الرئيسية
             </router-link>
-            <router-link 
-              to="/blog" 
+            <router-link
+              to="/blog"
               class="text-gray-700 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium transition-colors"
             >
-              Blog
+              المدونة
             </router-link>
-            <router-link 
-              to="/about" 
+            <router-link
+              to="/about"
               class="text-gray-700 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium transition-colors"
             >
-              About
+              نبذة
             </router-link>
           </div>
         </div>
       </div>
     </nav>
 
-    <main class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
+    <!-- Main Content -->
+    <main>
       <router-view />
     </main>
 
-    <footer class="bg-white border-t border-gray-200 mt-16">
-      <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
-        <div class="text-center text-gray-500 text-sm">
-          © 2024 Misfer. Built with Vue.js and Tailwind CSS.
-        </div>
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 mt-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <p class="text-gray-300">&copy; 2024 مســـــــفر. جميع الحقوق محفوظة.</p>
       </div>
     </footer>
   </div>
 </template>
 
 <script setup lang="ts">
-// Component logic can be added here
+// Component logic
 </script>
 
 <style>

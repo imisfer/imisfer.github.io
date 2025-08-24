@@ -3,72 +3,20 @@
     <!-- About Me Section -->
     <section class="text-center">
       <div class="w-32 h-32 mx-auto mb-8 bg-gradient-to-br from-indigo-400 to-purple-600 rounded-full flex items-center justify-center">
-        <span class="text-4xl font-bold text-white">M</span>
+        <span class="text-4xl font-bold text-white">م</span>
       </div>
-      <h1 class="text-4xl font-bold text-gray-900 mb-6">About Me</h1>
-      <p class="text-xl text-gray-600 leading-relaxed max-w-3xl mx-auto">
-        Hi, I'm Misfer! I'm a passionate developer who loves exploring new technologies 
-        and sharing knowledge with the community. This blog is my platform to document 
-        my learning journey and help others along the way.
-      </p>
+      <h1 class="text-4xl font-bold text-gray-900 mb-6" dir="rtl">نبذة</h1>
     </section>
 
-    <!-- Skills Section -->
-    <section>
-      <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">Skills & Technologies</h2>
-      <div class="grid md:grid-cols-2 gap-8">
-        <div class="bg-white rounded-lg shadow-md p-6">
-          <h3 class="text-xl font-semibold text-gray-900 mb-4">Frontend Development</h3>
-          <div class="space-y-3">
-            <div class="flex items-center justify-between">
-              <span class="text-gray-700">Vue.js</span>
-              <div class="w-24 bg-gray-200 rounded-full h-2">
-                <div class="bg-indigo-600 h-2 rounded-full" style="width: 90%"></div>
-              </div>
-            </div>
-            <div class="flex items-center justify-between">
-              <span class="text-gray-700">TypeScript</span>
-              <div class="w-24 bg-gray-200 rounded-full h-2">
-                <div class="bg-indigo-600 h-2 rounded-full" style="width: 85%"></div>
-              </div>
-            </div>
-            <div class="flex items-center justify-between">
-              <span class="text-gray-700">Tailwind CSS</span>
-              <div class="w-24 bg-gray-200 rounded-full h-2">
-                <div class="bg-indigo-600 h-2 rounded-full" style="width: 80%"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="bg-white rounded-lg shadow-md p-6">
-          <h3 class="text-xl font-semibold text-gray-900 mb-4">Tools & Build</h3>
-          <div class="space-y-3">
-            <div class="flex items-center justify-between">
-              <span class="text-gray-700">Vite</span>
-              <div class="w-24 bg-gray-200 rounded-full h-2">
-                <div class="bg-indigo-600 h-2 rounded-full" style="width: 85%"></div>
-              </div>
-            </div>
-            <div class="flex items-center justify-between">
-              <span class="text-gray-700">Git</span>
-              <div class="w-24 bg-gray-200 rounded-full h-2">
-                <div class="bg-indigo-600 h-2 rounded-full" style="width: 90%"></div>
-              </div>
-            </div>
-            <div class="flex items-center justify-between">
-              <span class="text-gray-700">Node.js</span>
-              <div class="w-24 bg-gray-200 rounded-full h-2">
-                <div class="bg-indigo-600 h-2 rounded-full" style="width: 75%"></div>
-              </div>
-            </div>
-          </div>
-        </div>
+    <!-- Personal Story Section -->
+    <section class="bg-white rounded-lg shadow-md p-8">
+      <div class="prose prose-lg max-w-none text-right" dir="rtl">
+        <div v-html="aboutContent" class="text-gray-800 leading-relaxed"></div>
       </div>
     </section>
 
-    <!-- Contact Section -->
-    <section class="bg-white rounded-lg shadow-md p-8 text-center">
+    <!-- Contact Section - Hidden -->
+    <!-- <section class="bg-white rounded-lg shadow-md p-8 text-center">
       <h2 class="text-2xl font-bold text-gray-900 mb-4">Let's Connect</h2>
       <p class="text-gray-600 mb-6">I'm always interested in hearing from fellow developers and tech enthusiasts.</p>
       <div class="flex justify-center space-x-4">
@@ -85,10 +33,20 @@
           </svg>
         </a>
       </div>
-    </section>
+    </section> -->
   </div>
 </template>
 
 <script setup lang="ts">
-// Component logic can be added here
+import { ref, onMounted } from 'vue'
+import { getPostBySlug } from '@/data/posts'
+
+const aboutContent = ref('')
+
+onMounted(() => {
+  const aboutPost = getPostBySlug('about')
+  if (aboutPost) {
+    aboutContent.value = aboutPost.content
+  }
+})
 </script> 
