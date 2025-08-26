@@ -108,4 +108,72 @@
     font-family: 'Amiri', serif;
     font-style: italic;
   }
+
+  /* Responsive image handling */
+  .post-content img {
+    display: block;
+    margin: 2rem auto;
+    max-width: 100%;
+    height: auto;
+    border-radius: 0.5rem;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  /* For images that should maintain height and crop width on small screens */
+  .post-content img.maintain-height {
+    width: 100%;
+    height: 400px; /* Fixed height */
+    object-fit: contain; /* This will maintain aspect ratio */
+    object-position: center center; /* Keep center of image */
+    border-radius: 0.5rem;
+    margin: 2rem auto;
+    /* Ensure the image maintains its height */
+    min-height: 400px;
+    max-height: 400px;
+    /* Force the image to fill the height while maintaining aspect ratio */
+    background-color: #f3f4f6; /* Light gray background for empty space */
+  }
+
+  /* Alternative approach for images that need to crop sides */
+  .post-content img.crop-sides {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    object-position: center; /* This keeps the center visible */
+    border-radius: 0.5rem;
+    margin: 2rem auto;
+    min-height: 400px;
+    max-height: 400px;
+  }
+
+  /* Specific styling for image with id='1000' */
+  .post-content img#1000 {
+    width: 100%;
+    height: 500px; /* Full height */
+    object-fit: cover;
+    object-position: center; /* Keep middle content visible */
+    border-radius: 0.5rem;
+    margin: 2rem auto;
+    min-height: 500px;
+    max-height: 500px;
+    display: block;
+  }
+
+  /* Responsive adjustments for the specific image */
+  @media (max-width: 768px) {
+    .post-content img#1000 {
+      height: 400px;
+      min-height: 400px;
+      max-height: 400px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .post-content img#1000 {
+      height: 300px;
+      min-height: 300px;
+      max-height: 300px;
+    }
+  }
 } 

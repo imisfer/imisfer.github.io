@@ -22,9 +22,6 @@ function extractFirst25Words(content: string): string {
 
 // Function to parse HTML and extract metadata and content using regex
 function parseHTMLPost(htmlContent: string): Post {
-  console.log('Parsing HTML content length:', htmlContent.length)
-  console.log('First 200 chars:', htmlContent.substring(0, 200))
-  
   // Extract metadata using regex
   const idMatch = htmlContent.match(/<meta name="post-id" content="([^"]+)"/)
   const titleMatch = htmlContent.match(/<meta name="post-title" content="([^"]+)"/)
@@ -33,8 +30,6 @@ function parseHTMLPost(htmlContent: string): Post {
   
   // Extract content between <div class="post-content" dir="rtl"> and </div>
   const contentMatch = htmlContent.match(/<div class="post-content" dir="rtl">([\s\S]*?)<\/div>/)
-  
-  console.log('Regex matches:', { idMatch, titleMatch, timestampMatch, slugMatch, contentMatch })
   
   const post = {
     id: idMatch ? idMatch[1] : '',
@@ -45,53 +40,34 @@ function parseHTMLPost(htmlContent: string): Post {
     slug: slugMatch ? slugMatch[1] : ''
   }
   
-  console.log('Parsed post:', post)
   return post
 }
 
-// Dynamically load all HTML post files from the posts directory
-// Using the raw plugin to import HTML as actual content
-const postModules = import.meta.glob('../posts/*.html', { eager: true })
+// Load HTML files as raw strings using Vite's import.meta.glob with ?raw suffix
+const modules = import.meta.glob('../posts/*.html', { query: '?raw', import: 'default', eager: true })
 
-console.log('Post modules loaded:', Object.keys(postModules))
-console.log('Post modules object:', postModules)
+console.log('Modules loaded:', Object.keys(modules))
+console.log('Modules object:', modules)
+console.log('Modules type:', typeof modules)
+console.log('Modules keys:', Object.keys(modules))
 
 // Convert the modules to Post objects
-const posts: Post[] = Object.values(postModules).map((module: any) => {
-  console.log('Processing module:', module)
-  const htmlContent = typeof module === 'string' ? module : module.default
-  console.log('HTML content type:', typeof htmlContent)
-  console.log('HTML content length:', htmlContent ? htmlContent.length : 'undefined')
-  return parseHTMLPost(htmlContent)
-})
+const posts: Post[] = Object.entries(modules)
+  .filter(([path]) => !path.includes('TEMPLATE.html')) // Exclude the template file
+  .map(([path, content]) => {
+    console.log('Processing path:', path, 'content type:', typeof content, 'content length:', content ? content.length : 'undefined')
+    const slug = path.match(/\.\.\/posts\/(.+)\.html$/)![1]
+    console.log('Extracted slug:', slug)
+    const post = parseHTMLPost(content)
+    console.log('Parsed post:', post)
+    return post
+  })
 
+console.log('Final posts array length:', posts.length)
 console.log('Final posts array:', posts)
 
-// All posts including the about page (for internal use)
-export const allPosts: Post[] = [
-  ...posts,
-  {
-    id: '9',
-    title: 'نبذة',
-    content: `<p dir="rtl">في عام ١٣٩٥هـ، أنجبتني. صنعتني على مهلٍ وتؤدة وكأنها تقول: ستلقاك الحياة كاملا بما أودعت فيك من المعاني، قويا بعطفك على النفوس، وفصيحا بإصغائك لكل شيء.</p>
-<p dir="rtl">والدي، والذي لشدة بساطته، لا يكاد يرى تعقيدات الحياة: يهزم الهائل بابتسامة ويعالج أذى الناس بذات الابتسامة.</p>
-<p dir="rtl">علماني كل شيء دون أن يقولا الكثير؛ كانا دليل المستخدم لفك شفرة الحياة.</p>
-<p dir="rtl">نشأت في قرية "الدار"؛ وادعة وجميلة. تتوسط تخوم وادي "شرى" بين منطقتي الباحة وعسير.</p>
-<p dir="rtl"><video style="width: 100%; height: 100%; border-radius: 15px;" src="https://misfer.info/hala/wp-content/uploads/shura.mov" autoplay="autoplay" loop="loop" muted="" width="1844" height="920"><span data-mce-type="bookmark" style="display: inline-block; width: 0px; overflow: hidden; line-height: 0;" class="mce_SELRES_start">﻿</span><span data-mce-type="bookmark" style="display: inline-block; width: 0px; overflow: hidden; line-height: 0;" class="mce_SELRES_start">﻿</span><span data-mce-type="bookmark" style="display: inline-block; width: 0px; overflow: hidden; line-height: 0;" class="mce_SELRES_start">﻿</span>
-<span data-mce-type="bookmark" style="display: inline-block; width: 0px; overflow: hidden; line-height: 0;" class="mce_SELRES_start">﻿</span><source type="video/quicktime" src="https://misfer.info/hala/wp-content/uploads/shura.mov" /><span data-mce-type="bookmark" style="display: inline-block; width: 0px; overflow: hidden; line-height: 0;" class="mce_SELRES_start">﻿</span>
-</video></p>
-<p dir="rtl">مستفيدا من تعليم الدولة المجاني بالكامل، نلت بكالوريوس هندسة الكمبيوتر من الظهران. وبعدها بعشر سنوات، ماجستير في الإدارة الصحية للتنفيذيين. عشر سنين أخرى، ماجستير في إدارة التقنية.</p>
-<p dir="rtl">تشرفت بالمشاركة في التنمية وبناء مستقبل مستدام ومزدهر لوطني على مدى عقدين في مجالات تقنية المعلومات، الرعاية الصحية، التغذية، والعقارات، شملت تنفيذ الاستراتيجيات وإدارة المشاريع.</p>
-<p dir="rtl">لدي شغف كبير تجاه إعادة الفضل إلى مجتمعي: للتدريب في إدارة المشاريع، بناء الاستراتيجيات، مساعدة الشركات الناشئة، والتوجيه الحياتي.</p>
-<p dir="rtl">مسيرتي المهنية طابعها: العطاء الغير مشروط، التعلم المستمر، والتحسين المستمر.</p>
-<p dir="rtl">.</p>
-<p dir="rtl">.</p>
-<p dir="rtl"><b>بين يدي منشئ هذا الكون يملأني الامتنان: منحني الحياة، ألهمني التعلم من المحن، والتواضع لأوقن أن لا فضل لي في شيء.</b></p>`,
-    timestamp: '30 Aug 2024 10:27:38 AM',
-    excerpt: '',
-    slug: 'about'
-  }
-]
+// All posts (blog posts only, no about page)
+export const allPosts: Post[] = [...posts]
 
 export function getPostBySlug(slug: string): Post | undefined {
   return allPosts.find(post => post.slug === slug)

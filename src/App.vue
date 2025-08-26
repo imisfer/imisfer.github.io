@@ -41,16 +41,12 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-gray-800 text-white py-8 mt-16">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <p class="text-gray-300">&copy; 2024 مســـــــفر. جميع الحقوق محفوظة.</p>
-      </div>
-    </footer>
+    <Footer />
   </div>
 </template>
 
 <script setup lang="ts">
-// Component logic
+import Footer from './components/Footer.vue'
 </script>
 
 <style>

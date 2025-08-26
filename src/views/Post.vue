@@ -64,23 +64,37 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, watch } from 'vue'
 import { useRoute } from 'vue-router'
-import { getAllPosts, getPostBySlug, type Post } from '@/data/posts'
+import { getAllPosts, getPostBySlug, allPosts, type Post } from '@/data/posts'
 
 const route = useRoute()
 const post = ref<Post | null>(null)
 const error = ref(false)
 
-onMounted(() => {
-  const slug = route.params.slug as string
+// Function to load post by slug
+function loadPost(slug: string) {
   if (slug) {
     const foundPost = getPostBySlug(slug)
     if (foundPost) {
       post.value = foundPost
+      error.value = false
     } else {
       error.value = true
+      post.value = null
     }
+  }
+}
+
+onMounted(() => {
+  const slug = route.params.slug as string
+  loadPost(slug)
+})
+
+// Watch for route changes to reload post when navigating between posts
+watch(() => route.params.slug, (newSlug) => {
+  if (newSlug) {
+    loadPost(newSlug as string)
   }
 })
 
@@ -92,21 +106,22 @@ const readingTime = computed(() => {
   return Math.ceil(wordCount / wordsPerMinute)
 })
 
-const allPosts = computed(() => getAllPosts())
+// Use allPosts to include the about page for navigation
+const postsForNavigation = computed(() => allPosts)
 
 const currentIndex = computed(() => {
   if (!post.value) return -1
-  return allPosts.value.findIndex(p => p.slug === post.value?.slug)
+  return postsForNavigation.value.findIndex(p => p.slug === post.value?.slug)
 })
 
 const previousPost = computed(() => {
   if (currentIndex.value <= 0) return null
-  return allPosts.value[currentIndex.value - 1]
+  return postsForNavigation.value[currentIndex.value - 1]
 })
 
 const nextPost = computed(() => {
-  if (currentIndex.value === -1 || currentIndex.value >= allPosts.value.length - 1) return null
-  return allPosts.value[currentIndex.value + 1]
+  if (currentIndex.value === -1 || currentIndex.value >= postsForNavigation.value.length - 1) return null
+  return postsForNavigation.value[currentIndex.value + 1]
 })
 
 function formatDate(timestamp: string): string {

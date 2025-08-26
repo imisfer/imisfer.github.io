@@ -4,7 +4,7 @@
     <section class="text-center mb-16">
       <h1 class="text-5xl font-bold text-gray-900 mb-6" dir="rtl">مرحباً بكم في مدونتي</h1>
       <p class="text-xl text-gray-600 leading-relaxed max-w-3xl mx-auto mb-8" dir="rtl">
-        مكان للكتابة والتأمل في الحياة والتكنولوجيا والفلسفة. أشارك معكم أفكاري وتجربتي في رحلة التعلم والنمو.
+        مكان للكتابة والتأمل في الحياة.
       </p>
       <div class="flex justify-center space-x-4 space-x-reverse">
         <router-link

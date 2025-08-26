@@ -1,12 +1,6 @@
 <template>
   <div class="max-w-4xl mx-auto space-y-12">
     <!-- About Me Section -->
-    <section class="text-center">
-      <div class="w-32 h-32 mx-auto mb-8 bg-gradient-to-br from-indigo-400 to-purple-600 rounded-full flex items-center justify-center">
-        <span class="text-4xl font-bold text-white">م</span>
-      </div>
-      <h1 class="text-4xl font-bold text-gray-900 mb-6" dir="rtl">نبذة</h1>
-    </section>
 
     <!-- Personal Story Section -->
     <section class="bg-white rounded-lg shadow-md p-8">
@@ -49,4 +43,4 @@ onMounted(() => {
     aboutContent.value = aboutPost.content
   }
 })
-</script> 
+</script>
