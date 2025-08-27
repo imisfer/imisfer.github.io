@@ -2,17 +2,33 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import { resolve } from 'path'
 
+// Custom plugin to handle HTML files as raw text
+function htmlRawPlugin() {
+  return {
+    name: 'html-raw',
+    transform(code: string, id: string) {
+      if (id.endsWith('.html')) {
+        return {
+          code: `export default ${JSON.stringify(code)}`,
+          map: null
+        }
+      }
+    }
+  }
+}
+
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: '',
   plugins: [
-    vue()
+    vue(),
+    htmlRawPlugin()
   ],
   resolve: {
     alias: {
       '@': resolve(__dirname, 'src'),
     },
   },
+  assetsInclude: ['**/*.html'],
   build: {
     target: 'es2015',
     outDir: 'dist',
